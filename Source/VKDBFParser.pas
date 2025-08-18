@@ -1033,7 +1033,8 @@ begin
             (CompareText(S, 'MIN') = 0) or
             (CompareText(S, 'MAX') = 0) or
             (CompareText(S, 'AVG') = 0) or
-            (CompareText(S, 'COUNT') = 0);
+            (CompareText(S, 'COUNT') = 0) or
+            (CompareText(S, 'DTOC') = 0);
 
 end;
 
@@ -1455,6 +1456,19 @@ function TVKDBFExprParser.Execute(Root: PDBFExprNode): Variant;
               Result := StringOfChar(FFC, 8);
             ANode^.FDataSize := 8;
             ANode^.FDataLen := 8;
+            ANode^.FDataPrec := 0;
+          end else if (CompareText(S, 'DTOC') = 0) then begin
+            V := PDBFExprNode(ANode^.FArgs.Items[0]);
+            Vr := EvaluteNodeValueComplex(V);
+            if VarType(Vr) = varDate then begin
+              if not VarIsNull(Vr) then
+                Result := Vr
+              else
+                Result := StringOfChar(FFC, 10);
+            end else
+              Result := StringOfChar(FFC, 10);
+            ANode^.FDataSize := 10;
+            ANode^.FDataLen := 10;
             ANode^.FDataPrec := 0;
           end else if (CompareText(S, 'DTTOS') = 0) then begin
             V := PDBFExprNode(ANode^.FArgs.Items[0]);
