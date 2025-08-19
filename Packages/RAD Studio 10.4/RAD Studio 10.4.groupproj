@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{09F94226-34E1-4486-97DF-A1D6F573B5DE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="VKDBFR27.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="VKDBFD27.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="VKDBFR27">
+        <MSBuild Projects="VKDBFR27.dproj"/>
+    </Target>
+    <Target Name="VKDBFR27:Clean">
+        <MSBuild Projects="VKDBFR27.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VKDBFR27:Make">
+        <MSBuild Projects="VKDBFR27.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="VKDBFD27">
+        <MSBuild Projects="VKDBFD27.dproj"/>
+    </Target>
+    <Target Name="VKDBFD27:Clean">
+        <MSBuild Projects="VKDBFD27.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VKDBFD27:Make">
+        <MSBuild Projects="VKDBFD27.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="VKDBFR27;VKDBFD27"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="VKDBFR27:Clean;VKDBFD27:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="VKDBFR27:Make;VKDBFD27:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
