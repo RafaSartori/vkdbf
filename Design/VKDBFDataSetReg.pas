@@ -26,6 +26,8 @@ implementation
 uses
   Classes, VKDBFDataSet;
 
+{$R DBF.RES}
+
 //******************************************************************************
 procedure Register;
 begin
